@@ -10,7 +10,7 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    npm install
    ```
 
-2. log in to your expo account
+2. log in to your expo account, your account needs to be added in xylex organization
 
 3. Start the app
 
