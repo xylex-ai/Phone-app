@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
 import { Image, StyleSheet } from "react-native";
-import { useTheme } from "./Components/ThemeContext"; // Import the ThemeContext
+import { useTheme } from "../Components/ThemeContext"; // Import the ThemeContext
 import Account from "./tabs/Account";
 import Notifications from "./tabs/Notifications";
 import Settings from "./tabs/Settings";
@@ -31,7 +31,7 @@ export default function HomePage({ route }: { route: any }) {
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <Image
-              source={require("./templates/user.png")}
+              source={require("../templates/user.png")}
               style={[
                 styles.tabIcon,
                 { tintColor: focused ? "#8F33E6" : isDarkMode ? "#aaa" : "#888" },
@@ -46,7 +46,7 @@ export default function HomePage({ route }: { route: any }) {
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <Image
-              source={require("./templates/notification-bell.png")}
+              source={require("../templates/notification-bell.png")}
               style={[
                 styles.tabIcon,
                 { tintColor: focused ? "#8F33E6" : isDarkMode ? "#aaa" : "#888" },
@@ -64,7 +64,7 @@ export default function HomePage({ route }: { route: any }) {
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <Image
-              source={require("./templates/setting.png")}
+              source={require("../templates/setting.png")}
               style={[
                 styles.tabIcon,
                 { tintColor: focused ? "#8F33E6" : isDarkMode ? "#aaa" : "#888" },

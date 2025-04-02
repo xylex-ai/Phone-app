@@ -1,17 +1,18 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect, useState } from "react";
 import {
-    FlatList,
-    RefreshControl,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  FlatList,
+  RefreshControl,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import { Swipeable } from "react-native-gesture-handler";
-import { useTheme } from "../Components/ThemeContext"; // Import the ThemeContext
+import NotificationItem from "../../Components/NotificationItem";
+import { useTheme } from "../../Components/ThemeContext";
 
 type Notification = {
   title: string;
@@ -62,7 +63,6 @@ export default function Notifications({ newNotificationTrigger }: NotificationsP
     try {
       const updatedInbox = [...inbox];
       const [archivedNotification] = updatedInbox.splice(index, 1);
-
       const updatedArchive = [...archive, archivedNotification];
 
       setInbox(updatedInbox);
@@ -80,13 +80,11 @@ export default function Notifications({ newNotificationTrigger }: NotificationsP
       if (type === "Inbox") {
         const updatedInbox = [...inbox];
         updatedInbox.splice(index, 1);
-
         setInbox(updatedInbox);
         await AsyncStorage.setItem("inbox", JSON.stringify(updatedInbox));
       } else {
         const updatedArchive = [...archive];
         updatedArchive.splice(index, 1);
-
         setArchive(updatedArchive);
         await AsyncStorage.setItem("archive", JSON.stringify(updatedArchive));
       }
@@ -128,38 +126,19 @@ export default function Notifications({ newNotificationTrigger }: NotificationsP
   const currentData = currentTab === "Inbox" ? inbox : archive;
 
   return (
-    <View
-      style={[
-        styles.container,
-        { backgroundColor: isDarkMode ? "#000000" : "#FFFFFF" },
-      ]}
-    >
+    <View style={[styles.container, { backgroundColor: isDarkMode ? "#000000" : "#FFFFFF" }]}>
       <View style={styles.tabContainer}>
         <TouchableOpacity
           style={[styles.tab, currentTab === "Inbox" ? styles.activeTab : null]}
           onPress={() => setCurrentTab("Inbox")}
         >
-          <Text
-            style={[
-              styles.tabText,
-              { color: isDarkMode ? "#FFFFFF" : "#000000" },
-            ]}
-          >
-            Inbox
-          </Text>
+          <Text style={[styles.tabText, { color: isDarkMode ? "#FFFFFF" : "#000000" }]}>Inbox</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.tab, currentTab === "Archive" ? styles.activeTab : null]}
           onPress={() => setCurrentTab("Archive")}
         >
-          <Text
-            style={[
-              styles.tabText,
-              { color: isDarkMode ? "#FFFFFF" : "#000000" },
-            ]}
-          >
-            Archive
-          </Text>
+          <Text style={[styles.tabText, { color: isDarkMode ? "#FFFFFF" : "#000000" }]}>Archive</Text>
         </TouchableOpacity>
       </View>
 
@@ -178,17 +157,8 @@ export default function Notifications({ newNotificationTrigger }: NotificationsP
       />
 
       {currentData.length === 0 ? (
-        <ScrollView
-          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
-        >
-          <Text
-            style={[
-              styles.noNotifications,
-              { color: isDarkMode ? "#AAAAAA" : "#555555" },
-            ]}
-          >
-            No {currentTab.toLowerCase()} notifications found.
-          </Text>
+        <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
+          <Text style={[styles.noNotifications, { color: isDarkMode ? "#AAAAAA" : "#555555" }]}>No {currentTab.toLowerCase()} notifications found.</Text>
         </ScrollView>
       ) : (
         <FlatList
@@ -197,47 +167,15 @@ export default function Notifications({ newNotificationTrigger }: NotificationsP
           )}
           keyExtractor={(_, index) => index.toString()}
           renderItem={({ item, index }) => (
-            <Swipeable
-              renderRightActions={() => renderRightActions(currentTab, index)}
-            >
-              <View
-                style={[
-                  styles.notificationItem,
-                  { backgroundColor: isDarkMode ? "#1E1E1E" : "#F9F9F9" },
-                ]}
-              >
-                <Text
-                  style={[
-                    styles.notificationTitle,
-                    { color: isDarkMode ? "#FFFFFF" : "#000000" },
-                  ]}
-                >
-                  {item.title}
-                </Text>
-                <Text
-                  style={[
-                    styles.notificationBody,
-                    { color: isDarkMode ? "#CCCCCC" : "#555555" },
-                  ]}
-                >
-                  {item.body}
-                </Text>
-                {item.dateSent && (
-                  <Text
-                    style={[
-                      styles.notificationDate,
-                      { color: isDarkMode ? "#888888" : "#999999" },
-                    ]}
-                  >
-                    Sent: {new Date(item.dateSent).toLocaleString()}
-                  </Text>
-                )}
-              </View>
+            <Swipeable renderRightActions={() => renderRightActions(currentTab, index)}>
+              <NotificationItem
+                title={item.title}
+                subtitle={item.body}
+                date={item.dateSent || ""}
+              />
             </Swipeable>
           )}
-          refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-          }
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
         />
       )}
     </View>
@@ -278,23 +216,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "center",
     marginTop: 20,
-  },
-  notificationItem: {
-    padding: 15,
-    marginBottom: 10,
-    borderRadius: 8,
-  },
-  notificationTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  notificationBody: {
-    fontSize: 14,
-    marginTop: 5,
-  },
-  notificationDate: {
-    fontSize: 12,
-    marginTop: 5,
   },
   actionButtonsContainer: {
     flexDirection: "row",
