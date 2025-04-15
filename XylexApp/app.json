@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Xylex",
-    "slug": "XylexApp",
+    "slug": "notifications-example",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -10,7 +10,7 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.Xylex.ai",
+      "bundleIdentifier": "dev.expo.notificationsexample",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
@@ -20,8 +20,8 @@
         "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.Xylex.ai",
-      "googleServicesFile": "./google-services.json"
+      "package" : "dev.expo.notificationsexample",
+      "googleServicesFile" : "./google-services.json"
     },
     "web": {
       "bundler": "metro",
@@ -48,7 +48,7 @@
         "origin": false
       },
       "eas": {
-        "projectId": "fea37173-4c0e-446f-9291-77ea084441d4"
+        "projectId": "0787680c-507a-4d1d-a40d-dcfb6f356d67"
       }
     },
     "owner": "xylex"

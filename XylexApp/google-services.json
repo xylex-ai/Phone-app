@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "1021059471095",
-    "project_id": "xylexapp",
-    "storage_bucket": "xylexapp.firebasestorage.app"
+    "project_number": "242052515105",
+    "project_id": "notifications-example-e109c",
+    "storage_bucket": "notifications-example-e109c.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1021059471095:android:0c7f35b2021d60e0d5e5f2",
+        "mobilesdk_app_id": "1:242052515105:android:192eda4d3221f93cdb2a60",
         "android_client_info": {
-          "package_name": "com.Xylex.ai"
+          "package_name": "dev.expo.notificationsexample"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDn4wcxi8JT9zBXKUnMPI8AwbvtYxW_I2w"
+          "current_key": "AIzaSyBjyP3TqxUJ4WW4JnyZXZw_VfL1BA9nN1I"
         }
       ],
       "services": {
